@@ -4,7 +4,7 @@ import { HomeLables, HomeLablesDesc } from "../constants/HomeLabels";
 describe('Open home page', () => {
     before(async () => {
         HomePage.open();
-        HomePage.acceptCookies();
+        await HomePage.acceptCookies();
         await browser.fullscreenWindow();
     });
 
@@ -26,15 +26,15 @@ describe('Open home page', () => {
     });
 
     it('Check list of features', async () => {
-        const featureTitle = await HomePage.FeatureTitle;
-        const speedCapTitle = await HomePage.SpeedCapTitle;
-        const speedCapDesc = await HomePage.SpeedCapDesc;
+        const featureTitle      = await HomePage.FeatureTitle;
+        const speedCapTitle     = await HomePage.SpeedCapTitle;
+        const speedCapDesc      = await HomePage.SpeedCapDesc;
         const highwayPilotTitle = await HomePage.HighwayPilotTitle;
-        const highwayPilotDesc = await HomePage.HighwayPilotDesc;
-        const driverCamerasTitle = await HomePage.DriverMonitoringCamerasTitle;
+        const highwayPilotDesc  = await HomePage.HighwayPilotDesc;
+        const driverCameraTitle = await HomePage.DriverMonitoringCamerasTitle;
         const driverCamerasDesc = await HomePage.DriverMonitoringCamerasDesc;
-        const careKeyTitle = await HomePage.CareKeyTitle;
-        const careKeyDesc = await HomePage.CareKeyDesc;
+        const careKeyTitle      = await HomePage.CareKeyTitle;
+        const careKeyDesc       = await HomePage.CareKeyDesc;
 
         await featureTitle.scrollIntoView();  // Scroll to view
 
@@ -46,7 +46,7 @@ describe('Open home page', () => {
         expect(await highwayPilotTitle.getText()).toEqual(HomeLables.HIGHWAY_PILOT);
         expect(await highwayPilotDesc.getText()).toEqual(HomeLablesDesc.HIGHWAY_PILOT);
 
-        expect(await driverCamerasTitle.getText()).toEqual(HomeLables.DRIVER_MONITORING_CAMERAS);
+        expect(await driverCameraTitle.getText()).toEqual(HomeLables.DRIVER_MONITORING_CAMERAS);
         expect(await driverCamerasDesc.getText()).toEqual(HomeLablesDesc.DRIVER_MONITORING_CAMERAS);
 
         expect(await careKeyTitle.getText()).toEqual(HomeLables.CARE_KEY);
@@ -55,15 +55,15 @@ describe('Open home page', () => {
 
     it('Check stories of real car survivors', async () => {
         const oneOfMillionTitle = (await HomePage.OneOfMillionTitle);
-        const oneOfMillionDesc = (await HomePage.OneOfMillionDesc);
-        const amyTitle = (await HomePage.AmyTitle);
-        const amyStory = (await HomePage.AmyStory);
-        const summerTitle = (await HomePage.SummerTitle);
-        const summerStory = (await HomePage.SummerStory);
-        const lindaMollyTitle = (await HomePage.LindaMollyTitle);
-        const lindaMollyStory = (await HomePage.LindaMollyStory);
-        const alexTitle = (await HomePage.AlexTitle);
-        const alexStory = (await HomePage.AlexStory);
+        const oneOfMillionDesc  = (await HomePage.OneOfMillionDesc);
+        const amyTitle          = (await HomePage.AmyTitle);
+        const amyStory          = (await HomePage.AmyStory);
+        const summerTitle       = (await HomePage.SummerTitle);
+        const summerStory       = (await HomePage.SummerStory);
+        const lindaMollyTitle   = (await HomePage.LindaMollyTitle);
+        const lindaMollyStory   = (await HomePage.LindaMollyStory);
+        const alexTitle         = (await HomePage.AlexTitle);
+        const alexStory         = (await HomePage.AlexStory);
 
         await oneOfMillionTitle.scrollIntoView();     // Scroll to view
 
@@ -84,10 +84,10 @@ describe('Open home page', () => {
     });
 
     it('Test Decades of innovation', async () => {
-        const innovationTitle = await HomePage.InnovationTitle;
-        const innovationDesc = await HomePage.InnovationDesc;
-        const innovationLearnMore = (await HomePage.InnovationLearnMore);
-        const getImage = await HomePage.GetImageView;
+        const innovationTitle       = await HomePage.InnovationTitle;
+        const innovationDesc        = await HomePage.InnovationDesc;
+        const innovationLearnMore   = (await HomePage.InnovationLearnMore);
+        const getImage              = await HomePage.GetImageView;
 
         await innovationTitle.scrollIntoView();   // Scroll to view
 
@@ -103,10 +103,10 @@ describe('Open home page', () => {
     });
 
     it('Test explore our models', async () => {
-        const exploreModelsTitle = await HomePage.exploreModelsTitle;
-        const modelsList = await HomePage.ModelsList;
-        const carouselNextButton = await HomePage.CarouselNextButton;
-        const carouselPreviousButton = await HomePage.CarouselPreviousButton;
+        const exploreModelsTitle    = await HomePage.exploreModelsTitle;
+        const modelsList            = await HomePage.ModelsList;
+        const carouselNextButton    = await HomePage.CarouselNextButton;
+        const carouselPrevButton    = await HomePage.CarouselPreviousButton;
 
         await exploreModelsTitle.scrollIntoView();  // Scroll to view
         expect(await exploreModelsTitle.getText()).toEqual(HomeLables.EXPLORE_OUR_MODELS);
@@ -130,7 +130,7 @@ describe('Open home page', () => {
             await model.moveTo();                       // hover on element
             await browser.pause(800);                   // pause for 0.8 seconds
         }
-        await carouselBtn(carouselPreviousButton);      // Clicks on Previous Carousel button
+        await carouselBtn(carouselPrevButton);          // Clicks on Previous Carousel button
     });
 
     it('Verify Disclaimer', async () => {

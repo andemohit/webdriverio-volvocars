@@ -1,12 +1,6 @@
-class HomePage {
-    open() {
-        browser.url('');
-    }
+import Page from "./page";
 
-    get acceptCookiesBtn() {
-        return $('#onetrust-accept-btn-handler');
-    }
-
+class HomePage extends Page {
     get logoSite() {
         return $('img._SN-bk._SN-bl._SN-bm._SN-i');
     }
@@ -122,17 +116,13 @@ class HomePage {
     get CarouselNextButton() {
         return $('//*[@data-autoid="springCarouselNextButton"]');
     }
-    
+
     get CarouselPreviousButton() {
         return $('//*[@data-autoid="springCarouselPreviousButton"]');
     }
 
     get Disclaimer() {
         return $('//*[@id="Disclaimer-1"]/section/div/div[1]/div/p');
-    }
-
-    acceptCookies() {
-        this.acceptCookiesBtn.click();
     }
 }
 

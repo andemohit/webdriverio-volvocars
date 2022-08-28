@@ -1,4 +1,5 @@
 export class XC40Labels {
-    static XC40_RECHARGE = 'XC40 Recharge';
-    static XC40_SUB_TITLE = 'For every you. Smart. Versatile. Fresher than ever. Meet our pure electric compact SUV – for every version of you.';
+    static PAGE_TITLE = 'Design your XC40 Recharge';
+    static PAGE_DESC = 'The first pure electric Volvo SUV. Designed for progressive, intuitive and tailpipe emission-free driving.';
+    static CHOOSE_YOUR_LEVEL = 'Choose your level';
 }
