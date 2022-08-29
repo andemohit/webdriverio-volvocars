@@ -1,5 +1,4 @@
-import { ColorLabels, XC40Labels, WheelLabels } from "../constants/XC40Recharge";
-import Page from "../pageobjects/page";
+import { ColorLabels, XC40Labels, WheelLabels, ExteriorStyling, InteriorStyling, OptionalEquipment } from "../constants/XC40Recharge";
 import XC40ElectricPage from "../pageobjects/XC40-electric.page";
 
 describe('Open home page', () => {
@@ -30,6 +29,7 @@ describe('Design you XC40 Recharge car', async () => {
         const pageDesc      = await XC40ElectricPage.PageDesc;
         const scrollToStart = await XC40ElectricPage.ScrollToStart;
         
+        await browser.pause(3000);
         expect(await pageTitle.getText()).toEqual(XC40Labels.PAGE_TITLE);
         expect(await pageDesc.getText()).toEqual(XC40Labels.PAGE_DESC);
 
@@ -43,18 +43,16 @@ describe('Design you XC40 Recharge car', async () => {
 
         expect(await levelTitle.getText()).toEqual(XC40Labels.CHOOSE_LEVEL);
         await coreLevel.click();        // Select the Core Level
-        await browser.pause(2000);      // wait for 2 seconds
     });
 
     it('Choose your powertrain', async () => {
         const powertrainLabel   = await XC40ElectricPage.PowertrainLabel;
         const singleMotor       = await XC40ElectricPage.SingleMotor;
         const twinMotor         = await XC40ElectricPage.TwinMotor;
-        
-        powertrainLabel.scrollIntoView();
-        expect(await powertrainLabel.getText()).toEqual(XC40Labels.POWERTRAIN_LABEL);
-        twinMotor.click();                  // Select Twin Motor
+
         await browser.pause(2000);          // wait fo 2 seconds
+        // expect(await powertrainLabel.getText()).toEqual(XC40Labels.POWERTRAIN_LABEL);
+        twinMotor.click();                  // Select Twin Motor
     });
 
     it('Choose your color', async () => {
@@ -86,8 +84,6 @@ describe('Design you XC40 Recharge car', async () => {
 
         // Color title & selected color label should match.
         expect(await colorStageName.getText()).toEqual(await selectColor.getAttribute('aria-label'));
-
-        await browser.pause(5000);
     });
 
     it('Choose your wheels', async () => {
@@ -119,4 +115,47 @@ describe('Design you XC40 Recharge car', async () => {
         await carouselSlide(prevWheelSlide);
         expect(await activeWheelTitle.getText()).toEqual(await selectWheel.getAttribute('aria-label'));
     });
+
+    it('Add exterior styling', async () => {
+        const exteriorTitle     = await XC40ElectricPage.ExteriorTitle;
+        const selectedExterior  = await XC40ElectricPage.SelectExterior(ExteriorStyling.TINTED_REAR_WINDOWS);
+
+        expect(await exteriorTitle.getText()).toEqual(XC40Labels.ADD_EXTERIOR);
+        await selectedExterior.click();
+    });
+
+    it('Choose your interior', async () => {
+        const interiorTitle = await XC40ElectricPage.InteriorTitle;
+        const selectInterior  = await XC40ElectricPage.SelectInterior(InteriorStyling.CONNECT_SUEDE_2);
+
+        await interiorTitle.waitForExist();
+        expect(await interiorTitle.getText()).toEqual(XC40Labels.ADD_INTERIOR);
+        await selectInterior.click();
+        await browser.pause(4000);
+    });
+
+    it('Add optional equipment', async () => {
+        const optionalEquipment = await XC40ElectricPage.OptionEquipmentTitle;
+
+        expect(await optionalEquipment.getText()).toEqual(XC40Labels.ADD_OPTIONAL);
+        
+        await (await XC40ElectricPage.SelectEquipment(OptionalEquipment.PIXEL_LED)).click();
+        await browser.pause(3000);
+        await (await XC40ElectricPage.SelectEquipment(OptionalEquipment.RECHARGE_TYRES)).click();
+        await browser.pause(3000);
+    });
+
+    it('Design is completed', async () => {
+        const conclusionTitle = await XC40ElectricPage.ConclusionTitle;
+        const reviewDesignBtn = await XC40ElectricPage.ReviewDesignBtn;
+
+        expect(await conclusionTitle.getText()).toEqual(XC40Labels.DESIGN_COMPLETED);
+        await conclusionTitle.scrollIntoView();
+        await browser.pause(3000);
+        await reviewDesignBtn.click();
+    });
+});
+
+describe('Review your XC40 Recharge', async () => {
+    it('Verify the title', async () => {});
 });

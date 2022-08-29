@@ -94,4 +94,36 @@ export default class DesignCar {
     get ActiveWheelTitle() {
         return $('[data-autoid="StandardWheels:name"]');
     }
+
+    get InteriorTitle() {
+        return $('h2[data-testid="stage-interior:title"]');
+    }
+    
+    async SelectInterior(title: string) {
+        return await $(`button[aria-label="${title}"]`);
+    }
+
+    get ExteriorTitle() {
+        return $('h2[data-testid="stage-exterior:title"]');
+    }
+
+    async SelectExterior(title: string) {
+        return await $(`[data-testid="stage-exterior"] button[aria-label=" ${title}"]`);
+    }
+
+    get OptionEquipmentTitle() {
+        return $('h2[data-testid="stage-options:title"]');
+    }
+
+    async SelectEquipment(title: string) {
+        return await $(`button[aria-label="${title}"]`);
+    }
+
+    get ConclusionTitle() {
+        return $('h2[data-testid="stage-conclusion:title"]');
+    }
+
+    get ReviewDesignBtn() {
+        return $('a[data-autoid="conclusionStage:reviewCTA"]');
+    }
 }
