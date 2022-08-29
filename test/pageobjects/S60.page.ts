@@ -1,7 +1,6 @@
 import DesignCar from "./DesignCar";
-import Page from "./page";
 
-class XC40Eelectric extends DesignCar {
+class S60 extends DesignCar {
     public open() {
         return super.open();
     }
@@ -18,9 +17,9 @@ class XC40Eelectric extends DesignCar {
         return $('//*[@id="nav:sideNavigation"]/div[2]/div[2]/div[2]/div/div/div/div[2]/a');
     }
 
-    get XC40Card() {
-        return $('a[data-di-id="di-id-47c916d7-f9aa649"]');
+    get S60Card() {
+        return $('a[data-di-id="di-id-fdc72f08-1f99e809"]');
     }
 }
 
-export default new XC40Eelectric();
+export default new S60();

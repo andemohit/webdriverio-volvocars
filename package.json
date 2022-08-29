@@ -19,6 +19,7 @@
         "wdio": "wdio run test/wdio.conf.ts",
         "wdio:home": "wdio run test/wdio.conf.ts --spec Home.e2e.ts",
         "wdio:xc40": "wdio run test/wdio.conf.ts --spec XC40-electric.e2e.ts",
+        "wdio:s60": "wdio run test/wdio.conf.ts --spec S60.e2e.ts",
         "wdio:electric": "wdio run test/wdio.conf.ts --spec Electric.e2e.ts",
         "allure:result": "allure generate allure-results --clean && allure open"
     }
