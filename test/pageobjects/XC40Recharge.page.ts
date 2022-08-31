@@ -1,7 +1,7 @@
 import DesignCar from "./DesignCar";
 import Page from "./page";
 
-class XC40Eelectric extends DesignCar {
+class XC40Recharge extends DesignCar {
     public open() {
         return super.open();
     }
@@ -23,4 +23,4 @@ class XC40Eelectric extends DesignCar {
     }
 }
 
-export default new XC40Eelectric();
+export default new XC40Recharge();

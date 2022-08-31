@@ -11,17 +11,6 @@ export class XC40Labels {
     static DESIGN_COMPLETED = 'Your design is complete!';
 }
 
-export class ColorLabels {
-    static BLACK_STONE      = 'Black Stone';
-    static ONYX_BLACK       = 'Onyx Black';
-    static THUNDER_GREY     = 'Thunder Grey';
-    static FJORD_BLUE       = 'Fjord Blue';
-    static SILVER_DAWN      = 'Silver Dawn';
-    static BRIGHT_DUSK      = 'Bright Dusk';
-    static CRYSTAL_WHITE    = 'Crystal White';
-    static SAGE_GREEN       = 'Sage Green';
-}
-
 export class WheelLabels {
     static DOUBLE_SPOKE     = '19″ 5-Double Spoke Black Diamond Cut';
     static SPOKE_DIAMOND    = '20″ 5-Spoke Black Diamond Cut';
@@ -46,4 +35,11 @@ export class OptionalEquipment {
     static HOME_CHARGING_16A    = 'Home charging cable, mobile 7m (blue plug 16A)';
     static STATION_CABLE_4M     = 'Charging station cable, 4.5m';
     static STATION_CABLE_7M     = 'Charging station cable, 7m';
+}
+
+export class ReviewLabels {
+    static REVIEW_TITLE         = 'Review your XC40 Recharge';
+    static REVIEW_DESC          = "Once you’ve reviewed your design, you’ll confirm and submit your request to your preferred retailer.";
+    static CAR_NAME             = 'XC40 Recharge';
+    static VIEW_ALL_FEATURES    = "VIEW ALL FEATURES";
 }

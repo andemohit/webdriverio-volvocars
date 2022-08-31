@@ -1,4 +1,6 @@
-export default class DesignCar {
+import Review from "./Review"
+
+export default class DesignCar extends Review {
     /**
     * Opens a sub page of the page
     * @param path path of the sub page (e.g. /path/to/page.html)
@@ -11,6 +13,7 @@ export default class DesignCar {
         return await $('#onetrust-accept-btn-handler').click();
     }
 
+    /**-------- DESING CAR START -------- */
     get PageTitle() {
         return $('h1[data-autoid="stage-intro:title"]');
     }
@@ -27,28 +30,16 @@ export default class DesignCar {
         return $('[data-testid="stage-salesVersion:title"]');
     }
 
-    get CoreLevel() {
-        return $('[aria-label=" Core"]');
-    }
-
-    get PlusLevel() {
-        return $('[aria-label=" Plus"]');
-    }
-
-    get UltimateLevel() {
-        return $('[aria-label=" Ultimate"]');
+    async GetLevel(level: string) {
+        return await $(`[aria-label=" ${level}"]`);
     }
 
     get PowertrainLabel() {
         return $('h2[data-testid="stage-powertrain:title"]');
     }
 
-    get SingleMotor() {
-        return $('button[aria-label="Single motor"]');
-    }
-
-    get TwinMotor() {
-        return $('button[aria-label="Twin motor"]');
+    async PowertrainMotor(motor: string) {
+        return await $(`[data-testid="powertrain"] button[aria-label="${motor}"]`);
     }
 
     SelectColor(color: string) {
@@ -87,21 +78,27 @@ export default class DesignCar {
         return $('[data-testid="ColorsStage"] [aria-label="Previous slide"]');
     }
 
-    async SelectWheel(wheelType: string) {
-        return await $(`button[aria-label="${wheelType}"]`);
-    }
-
     get ActiveWheelTitle() {
         return $('[data-autoid="StandardWheels:name"]');
     }
 
+        /**-------- Interior START -------- */
     get InteriorTitle() {
         return $('h2[data-testid="stage-interior:title"]');
     }
-    
-    async SelectInterior(title: string) {
-        return await $(`button[aria-label="${title}"]`);
+
+    ChooseInterior(interiroName: string) {
+        return $(`[data-testid="stage-interior"] [aria-label="${interiroName}"]`);
     }
+
+    get OverlayTitle() {
+        return $('h2[data-autoid="overlay:title"]');
+    }
+
+    get AcceptOverlay() {
+        return $('button[data-autoid="conflictOverlay:accept"]');
+    }
+        /**-------- Interior END -------- */
 
     get ExteriorTitle() {
         return $('h2[data-testid="stage-exterior:title"]');
@@ -111,19 +108,34 @@ export default class DesignCar {
         return await $(`[data-testid="stage-exterior"] button[aria-label=" ${title}"]`);
     }
 
+        /** Add Packages START */
+    get PackageTitle() {
+        return $('h2[data-autoid="stage-packages:title"]');
+    }
+
+    async AddPackages(packageName: string) {
+        return await $(`[data-testid="stage-packages"] button[aria-label="${packageName}"]`);
+    }
+        /** Add Packages END */
+
+        /** Option Equipment START */
     get OptionEquipmentTitle() {
         return $('h2[data-testid="stage-options:title"]');
     }
-
-    async SelectEquipment(title: string) {
-        return await $(`button[aria-label="${title}"]`);
-    }
+        /** Option Equipment END */
 
     get ConclusionTitle() {
-        return $('h2[data-testid="stage-conclusion:title"]');
+        return $('[data-testid="stage-conclusion"] h2[data-testid="stage-conclusion:title"]');
     }
 
     get ReviewDesignBtn() {
-        return $('a[data-autoid="conclusionStage:reviewCTA"]');
+        return $('[data-testid="stage-conclusion"] a[data-autoid="conclusionStage:reviewCTA"]');
     }
+
+    /**-------- DESING CAR END -------- */
+
+    async GetByAriaLabel(title: string) {
+        return await $(`button[aria-label="${title}"]`);
+    }
+
 }

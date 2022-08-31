@@ -1,5 +1,6 @@
-import { ColorLabels, XC40Labels, WheelLabels, ExteriorStyling, InteriorStyling, OptionalEquipment } from "../constants/XC40Recharge";
-import XC40ElectricPage from "../pageobjects/XC40-electric.page";
+import { XC40Labels, WheelLabels, ExteriorStyling, InteriorStyling, OptionalEquipment, ReviewLabels } from "./XC40Labels";
+import XC40ElectricPage from "../../pageobjects/XC40Recharge.page";
+import * as CONSTANT from "../../constants";
 
 describe('Open home page', () => {
     before(async () => {
@@ -39,19 +40,17 @@ describe('Design you XC40 Recharge car', async () => {
 
     it('Choose your level', async () => {
         const levelTitle    = await XC40ElectricPage.LevelTitle;
-        const coreLevel     = await XC40ElectricPage.UltimateLevel;
+        const engineLevel   = await XC40ElectricPage.GetLevel(CONSTANT.EngineLevels.ULTIMATE);
 
         expect(await levelTitle.getText()).toEqual(XC40Labels.CHOOSE_LEVEL);
-        await coreLevel.click();        // Select the Core Level
+        await engineLevel.click();        // Select the Core Level
     });
 
     it('Choose your powertrain', async () => {
         const powertrainLabel   = await XC40ElectricPage.PowertrainLabel;
-        const singleMotor       = await XC40ElectricPage.SingleMotor;
-        const twinMotor         = await XC40ElectricPage.TwinMotor;
+        const twinMotor         = await XC40ElectricPage.PowertrainMotor(CONSTANT.Powertrain.TWIN_MOTOR);
 
         await browser.pause(2000);          // wait fo 2 seconds
-        // expect(await powertrainLabel.getText()).toEqual(XC40Labels.POWERTRAIN_LABEL);
         twinMotor.click();                  // Select Twin Motor
     });
 
@@ -59,7 +58,7 @@ describe('Design you XC40 Recharge car', async () => {
         const colorCarouselList = await XC40ElectricPage.ColorCarouselList;
         const nextSlide         = await XC40ElectricPage.NextColorSlide;
         const previousSlide     = await XC40ElectricPage.PreviousColorSlide;
-        let selectColor         = await XC40ElectricPage.SelectColor(ColorLabels.SAGE_GREEN);
+        let selectColor         = await XC40ElectricPage.SelectColor(CONSTANT.ColorLabels.SAGE_GREEN);
         const colorStageName    = await XC40ElectricPage.ColorStageName;
 
         /**
@@ -77,7 +76,7 @@ describe('Design you XC40 Recharge car', async () => {
         await browser.pause(3000);          // Wait for 3 seconds
         await carouselSlide(nextSlide);     // Slide to right
 
-        selectColor = await XC40ElectricPage.SelectColor(ColorLabels.CRYSTAL_WHITE);
+        selectColor = await XC40ElectricPage.SelectColor(CONSTANT.ColorLabels.CRYSTAL_WHITE);
         await selectColor.click();          // Select Crystal White color
         await browser.pause(3000);          // Wait for 3 seconds
         await carouselSlide(previousSlide); // Slide to left
@@ -91,7 +90,7 @@ describe('Design you XC40 Recharge car', async () => {
         const wheelsCarousel    = await XC40ElectricPage.WheelsCarousel;
         const nextWheelSlide    = await XC40ElectricPage.NextWheelSlide;
         const prevWheelSlide    = await XC40ElectricPage.PreviousWheelSlide;
-        let selectWheel       = await XC40ElectricPage.SelectWheel(WheelLabels.DOUBLE_SPOKE);
+        let selectWheel       = await XC40ElectricPage.GetByAriaLabel(WheelLabels.DOUBLE_SPOKE);
         const activeWheelTitle  = await XC40ElectricPage.ActiveWheelTitle;
 
         /**
@@ -109,7 +108,7 @@ describe('Design you XC40 Recharge car', async () => {
         
         await selectWheel.click();
         await carouselSlide(nextWheelSlide);
-        selectWheel = await XC40ElectricPage.SelectWheel(WheelLabels.SPOKE_DIAMOND);
+        selectWheel = await XC40ElectricPage.GetByAriaLabel(WheelLabels.SPOKE_DIAMOND);
         await selectWheel.click();
         await browser.pause(3000);
         await carouselSlide(prevWheelSlide);
@@ -126,7 +125,7 @@ describe('Design you XC40 Recharge car', async () => {
 
     it('Choose your interior', async () => {
         const interiorTitle = await XC40ElectricPage.InteriorTitle;
-        const selectInterior  = await XC40ElectricPage.SelectInterior(InteriorStyling.CONNECT_SUEDE_2);
+        const selectInterior  = await XC40ElectricPage.GetByAriaLabel(InteriorStyling.CONNECT_SUEDE_2);
 
         await interiorTitle.waitForExist();
         expect(await interiorTitle.getText()).toEqual(XC40Labels.ADD_INTERIOR);
@@ -139,9 +138,9 @@ describe('Design you XC40 Recharge car', async () => {
 
         expect(await optionalEquipment.getText()).toEqual(XC40Labels.ADD_OPTIONAL);
         
-        await (await XC40ElectricPage.SelectEquipment(OptionalEquipment.PIXEL_LED)).click();
+        await (await XC40ElectricPage.GetByAriaLabel(OptionalEquipment.PIXEL_LED)).click();
         await browser.pause(3000);
-        await (await XC40ElectricPage.SelectEquipment(OptionalEquipment.RECHARGE_TYRES)).click();
+        await (await XC40ElectricPage.GetByAriaLabel(OptionalEquipment.RECHARGE_TYRES)).click();
         await browser.pause(3000);
     });
 
@@ -151,11 +150,70 @@ describe('Design you XC40 Recharge car', async () => {
 
         expect(await conclusionTitle.getText()).toEqual(XC40Labels.DESIGN_COMPLETED);
         await conclusionTitle.scrollIntoView();
-        await browser.pause(3000);
+        await browser.pause(2000);
         await reviewDesignBtn.click();
     });
 });
 
 describe('Review your XC40 Recharge', async () => {
-    it('Verify the title', async () => {});
+    it('Verify the title', async () => {
+        const reviewTitle   = await XC40ElectricPage.ReviewTitle;
+        const reviewDesc    = await XC40ElectricPage.ReviewDesc;
+
+        await browser.pause(2000);
+        expect(await reviewTitle.getText()).toEqual(ReviewLabels.REVIEW_TITLE);
+        expect(await reviewDesc.getText()).toEqual(ReviewLabels.REVIEW_DESC);
+    });
+
+    it ('Test Features popup', async () => {
+        const viewFeaturesBtn = await XC40ElectricPage.ViewFeaturesBtn;
+        const closeFeatureBtn = await XC40ElectricPage.CloseFeatureBtn;
+
+        expect(await viewFeaturesBtn.getText()).toEqual(ReviewLabels.VIEW_ALL_FEATURES);
+        await viewFeaturesBtn.click();
+        await browser.pause(2000);
+        await closeFeatureBtn.click();
+        await browser.pause(1000);
+    });
+
+    it('Test the carousel', async () => {
+        const nextCaorouselBtn  = await XC40ElectricPage.ReviewNextCarousel;
+        const prevCarouselBtn   = await XC40ElectricPage.ReviewPrevCarousel;
+
+        await nextCaorouselBtn.click();
+        await browser.pause(1000);
+        await nextCaorouselBtn.click();
+        await browser.pause(1000);
+        await nextCaorouselBtn.click();
+        await browser.pause(1000);
+        await prevCarouselBtn.click();
+        await browser.pause(1000);
+        await prevCarouselBtn.click();
+    });
+
+    it('Review your design', async () => {
+        const reviewLevel       = await XC40ElectricPage.ReviewLevel;
+        const reviewPowertrain  = await XC40ElectricPage.ReviewPowertrain;
+        const reviewColor       = await XC40ElectricPage.ReviewColor;
+        const reviewWheels      = await XC40ElectricPage.ReviewWheels;
+        const reviewInterior    = await XC40ElectricPage.ReviewInterior;
+
+        await browser.pause(3000);
+        await reviewLevel.scrollIntoView();
+        // expect(await reviewLevel.getText()).toEqual(CONSTANT.EngineLevels.ULTIMATE);
+        expect(await (await reviewPowertrain.getText()).toLowerCase()).toEqual(CONSTANT.Powertrain.TWIN_MOTOR.toLocaleLowerCase());
+        expect(await reviewColor.getText()).toEqual(CONSTANT.ColorLabels.CRYSTAL_WHITE);
+        expect(await reviewWheels.getText()).toEqual(WheelLabels.SPOKE_DIAMOND);
+        expect(await reviewInterior.getText()).toEqual(InteriorStyling.CONNECT_SUEDE_2);
+    });
+
+    it('Review environment impact', async () => {
+        const reviewEnvTitle    = await XC40ElectricPage.EnvImpact;
+        const reviewEnvDesc     = await XC40ElectricPage.EnvImpactDesc;
+
+        await reviewEnvTitle.waitForExist();
+        await reviewEnvTitle.scrollIntoView();
+        expect(await reviewEnvTitle.getText()).toEqual(CONSTANT.ReviewTitles.ENVIRONMENT_IMPACT);
+        expect(await reviewEnvDesc.getText()).toEqual(CONSTANT.ReviewDesc.ENV_IMPACT_DESC);
+    });
 });

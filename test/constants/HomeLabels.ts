@@ -29,3 +29,11 @@ export class HomeLablesDesc {
     static ALEX = 'Alex talks about the collision that nearly took his life, but since he was wearing a safety belt only left him with a scar.';
     static INNOVATION = "Ever since our founding in 1927, we've been designing cars that put people first. Discover our most important safety innovations over the years.";
 }
+
+export class ReviewTitles {
+    static ENVIRONMENT_IMPACT   = 'Environmental impact';
+}
+
+export class ReviewDesc {
+    static ENV_IMPACT_DESC      = "Adding, removing items that affect your Volvo’s fuel economy and CO2 emissions will change your environmental taxes in accordance with NEDC and WLTP.";
+}
