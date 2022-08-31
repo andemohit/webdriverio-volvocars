@@ -137,8 +137,6 @@ describe('Design you S60 car', async () => {
         
         await addPackageLabel.scrollIntoView();
         expect(await addPackageLabel.getText()).toEqual(S60Labels.ADD_PACKAGE);
-        // await browser.pause(2000);
-        // await (await S60.AddPackages(PackageLabels.POWER_SEATS)).click();
         await browser.pause(2000);
         await (await S60.AddPackages(PackageLabels.CLIMATE)).click();
         await browser.pause(2000);
@@ -149,7 +147,6 @@ describe('Design you S60 car', async () => {
         expect(await optionalEquipment.getText()).toEqual(S60Labels.ADD_OPTIONAL);
 
         await (await S60.GetByAriaLabel(OptionalEquipment.PLOESTAR)).click();
-        await browser.pause(2000);
         await browser.pause(2000);
         await (await S60.GetByAriaLabel(OptionalEquipment.MUD_FLAPS_REAR)).click();
         await browser.pause(2000);

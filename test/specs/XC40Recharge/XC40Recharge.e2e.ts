@@ -90,7 +90,7 @@ describe('Design you XC40 Recharge car', async () => {
         const wheelsCarousel    = await XC40ElectricPage.WheelsCarousel;
         const nextWheelSlide    = await XC40ElectricPage.NextWheelSlide;
         const prevWheelSlide    = await XC40ElectricPage.PreviousWheelSlide;
-        let selectWheel       = await XC40ElectricPage.GetByAriaLabel(WheelLabels.DOUBLE_SPOKE);
+        let selectWheel         = await XC40ElectricPage.GetByAriaLabel(WheelLabels.DOUBLE_SPOKE);
         const activeWheelTitle  = await XC40ElectricPage.ActiveWheelTitle;
 
         /**
