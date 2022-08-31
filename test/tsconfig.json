@@ -8,6 +8,7 @@
             "expect-webdriverio",
             "wdio-image-comparison-service"
         ],
-        "target": "es2019"
+        "target": "es2019",
+        "outDir": "dist"
     }
 }

@@ -1,3 +1,4 @@
+import { deepStrictEqual } from 'assert';
 import * as CONSTANT from '../../constants';
 import S60 from "../../pageobjects/S60.page";
 import { InteriorLabels, OptionalEquipment, PackageLabels, ReviewLabels, S60Labels, WheelLabels } from './S60Labels';
@@ -36,6 +37,7 @@ describe('Design you S60 car', async () => {
 
         expect(await pageTitle.getText()).toEqual(S60Labels.PAGE_TITLE);
         expect(await pageDesc.getText()).toEqual(S60Labels.PAGE_DESC);
+        // deepStrictEqual(browser.checkElement(await S60.IntroImage, 'S60'), 0);
         await scrollToStart.click();
         await browser.pause(3000);
     });
@@ -44,8 +46,10 @@ describe('Design you S60 car', async () => {
         const levelTitle = await S60.LevelTitle;
         const engineLevel = await S60.GetLevel(CONSTANT.EngineLevels.PLUS);
 
-        expect(await levelTitle.getText()).toEqual(S60Labels.CHOOSE_LEVEL);
-        await engineLevel.click();        // Select the Core Level
+        await levelTitle.waitForExist().then(async () => {
+            expect(await levelTitle.getText()).toEqual(S60Labels.CHOOSE_LEVEL);
+        });
+        await engineLevel.click();      // Select the Plus Level
         await browser.pause(2000);      // wait for 2 seconds
     });
 

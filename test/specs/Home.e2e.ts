@@ -5,17 +5,19 @@ describe('Open home page', () => {
     before(async () => {
         HomePage.open();
         await HomePage.acceptCookies();
-        await browser.fullscreenWindow();
+        await browser.maximizeWindow();
     });
 
-    // it('should save some screenshots', async () => {
-    //     // Save a full page screenshot
-    //     await browser.saveFullPageScreen('fullPage');
+    it('Should test image comparison for top nav bar',async () => {
+        expect(await browser.checkScreen('#site-nav-topbar-wrapper', {})).toEqual(0);
+    });
 
-    //     // await browser.saveElement(await $('#ImageWithText-1'), 'innovationSection');
-    // });
+    it('Should test image comparison for callouts', async() => {
+        await (await HomePage.IconCalloutEl).click();
+        expect(await browser.checkElement(await HomePage.IconCalloutEl, 'icon-callouts', {})).toEqual(0);
+    });
 
-    it('Check home page title & description', async () => {
+    it('Should test home page title & description', async () => {
         const ideaTitle = await HomePage.IdeaTitle;
         const ideaTitleDesc = await HomePage.IdeaTitleDesc;
 
@@ -66,6 +68,7 @@ describe('Open home page', () => {
         const alexStory         = (await HomePage.AlexStory);
 
         await oneOfMillionTitle.scrollIntoView();     // Scroll to view
+        await browser.pause(2000);
 
         expect(await oneOfMillionTitle.getText()).toEqual(HomeLables.ONE_IN_A_MILLION);
         expect(await oneOfMillionDesc.getText()).toEqual(HomeLablesDesc.ONE_IN_A_MILLION);

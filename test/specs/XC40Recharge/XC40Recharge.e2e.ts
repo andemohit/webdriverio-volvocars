@@ -50,7 +50,9 @@ describe('Design you XC40 Recharge car', async () => {
         const powertrainLabel   = await XC40ElectricPage.PowertrainLabel;
         const twinMotor         = await XC40ElectricPage.PowertrainMotor(CONSTANT.Powertrain.TWIN_MOTOR);
 
+        await powertrainLabel.scrollIntoView();
         await browser.pause(2000);          // wait fo 2 seconds
+        expect(await powertrainLabel.getText()).toEqual(XC40Labels.POWERTRAIN_LABEL);
         twinMotor.click();                  // Select Twin Motor
     });
 

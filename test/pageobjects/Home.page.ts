@@ -2,7 +2,11 @@ import Page from "./page";
 
 class HomePage extends Page {
     get logoSite() {
-        return $('img._SN-bk._SN-bl._SN-bm._SN-i');
+        return $('a[data-autoid="nav:siteNavLogoSmall"] img._SN-bk._SN-bl._SN-bm._SN-i');
+    }
+
+    get IconCalloutEl() {
+        return $('#IconCallouts-1');
     }
 
     get IdeaTitle() {

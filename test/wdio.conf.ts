@@ -87,7 +87,15 @@ export const config: Options.Testrunner = {
         maxInstances: 5,
         //
         browserName: 'chrome',
-        acceptInsecureCerts: true
+        acceptInsecureCerts: true,
+        'goog:chromeOptions': {
+            args: [
+                '--no-sandbox',
+                '--disable-infobars',
+                '--disable-gpu',
+                // '--window-size=1440,735'
+            ],
+        }
         // If outputDir is provided WebdriverIO can capture driver session logs
         // it is possible to configure which logTypes to include/exclude.
         // excludeDriverLogs: ['*'], // pass '*' to exclude all driver session logs
@@ -144,9 +152,9 @@ export const config: Options.Testrunner = {
         ['chromedriver', {}],
         ['docker', {}],
         ['image-comparison', {
-            baselineFolder: join(process.cwd(), './tests/'),
+            baselineFolder: join(process.cwd(), './screenshots/baselineImages'),
             formatImageName: '{tag}-{logName}-{width}x{height}',
-            screenshotPath: join(process.cwd(), '.tmp/'),
+            screenshotPath: join(process.cwd(), './screenshots/actualImages'),
             savePerInstance: true,
             autoSaveBaseline: true,
             blockOutStatusBar: true,

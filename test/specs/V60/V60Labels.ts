@@ -1,6 +1,6 @@
 export class V60Labels {
     static PAGE_TITLE       = 'Design your V60';
-    static PAGE_DESC        = 'The versatile and dynamic Scandinavian estate. Made to move you';
+    static PAGE_DESC        = 'The versatile and dynamic Scandinavian estate. Made to move you.';
     static CHOOSE_LEVEL     = 'Choose your level';
     static POWERTRAIN_LABEL = 'Choose your powertrain';
     static CHOOSE_COLOR     = 'Choose your color';

@@ -22,6 +22,10 @@
         "wdio:s60": "wdio run test/wdio.conf.ts --spec S60.e2e.ts",
         "wdio:v60": "wdio run test/wdio.conf.ts --spec V60.e2e.ts",
         "wdio:electric": "wdio run test/wdio.conf.ts --spec Electric.e2e.ts",
-        "allure:result": "allure generate allure-results --clean && allure open"
+        "wdio:visualregression": "wdio run test/wdio.conf.ts --spec Home.spec.ts",
+        "allure:result": "allure generate allure-results --clean && allure open",
+        "build": "npx del ./dist && npx tsc",
+        "docker:build": "docker build -t wdio_volvo -f Dockerfile .",
+        "docker:run": "docker run -it wdio_volvo"
     }
 }
