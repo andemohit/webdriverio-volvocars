@@ -20,6 +20,14 @@ class S60 extends DesignCar {
     get S60Card() {
         return $('a[data-di-id="di-id-fdc72f08-1f99e809"]');
     }
+
+    get IntroEl() {
+        return $('[data-testid="stage-intro"]');
+    }
+
+    get SalesVersionEl() {
+        return $('[data-testid="stage-salesVersion"]');
+    }
 }
 
 export default new S60();

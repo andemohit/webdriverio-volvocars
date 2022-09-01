@@ -6,6 +6,7 @@ describe('Open home page', () => {
     describe('Open home page', () => {
         before(async () => {
             V60.open();                    // Open home page
+            await browser.maximizeWindow();
             await V60.acceptCookies();     // Accepts cookies
         });
 
@@ -27,7 +28,11 @@ describe('Open home page', () => {
 });
 
 describe('Design you V60 Recharge car', async () => {
-    it('Verify the title', async () => {
+    it('Should test image comparision for V60 landing page', async () => {
+        expect(await browser.checkElement(await V60.IntroEl, 'S60-intro', {})).toEqual(0);
+    });
+
+    it('Should verify the V60 title', async () => {
         const pageTitle     = await V60.PageTitle;
         const pageDesc      = await V60.PageDesc;
         const scrollToStart = await V60.ScrollToStart;
@@ -40,7 +45,7 @@ describe('Design you V60 Recharge car', async () => {
         await browser.pause(3000);
     });
 
-    it('Choose your level', async () => {
+    it('Should select a level', async () => {
         const levelTitle    = await V60.LevelTitle;
         const engineLevel   = await V60.GetLevel(CONSTANT.EngineLevels.ESSENTIAL);
 
@@ -48,7 +53,7 @@ describe('Design you V60 Recharge car', async () => {
         await engineLevel.click();        // Select the Essential Level
     });
 
-    it('Choose your color', async () => {
+    it('Should select a color', async () => {
         const colorCarouselList = await V60.ColorCarouselList;
         const nextSlide         = await V60.NextColorSlide;
         const previousSlide     = await V60.PreviousColorSlide;
@@ -79,7 +84,7 @@ describe('Design you V60 Recharge car', async () => {
         expect(await colorStageName.getText()).toEqual(await selectColor.getAttribute('aria-label'));
     });
 
-    it('Choose your wheels', async () => {
+    it('Should select a wheel', async () => {
         const wheelsTitle       = await V60.WheelsTitle;
         const wheelsCarousel    = await V60.WheelsCarousel;
         const nextWheelSlide    = await V60.NextWheelSlide;
@@ -104,7 +109,7 @@ describe('Design you V60 Recharge car', async () => {
         expect(await activeWheelTitle.getText()).toEqual(await selectWheel.getAttribute('aria-label'));
     });
 
-    it('Choose your interior', async () => {
+    it('Should select a interior', async () => {
         const interiorTitle = await V60.InteriorTitle;
         const selectInterior  = await V60.GetByAriaLabel(InteriorStyling.BLOND_LEATHER);
 
@@ -114,7 +119,7 @@ describe('Design you V60 Recharge car', async () => {
         await browser.pause(4000);
     });
 
-    it('Add Packages', async () => {
+    it('Should select a packages', async () => {
         const addPackageLabel = await V60.PackageTitle;
 
         await addPackageLabel.scrollIntoView();
@@ -124,7 +129,7 @@ describe('Design you V60 Recharge car', async () => {
         await browser.pause(2000);
     });
 
-    it('Add optional equipment', async () => {
+    it('Should select optional equipment', async () => {
         const optionalEquipment = await V60.OptionEquipmentTitle;
         expect(await optionalEquipment.getText()).toEqual(V60Labels.ADD_OPTIONAL);
 
@@ -145,8 +150,8 @@ describe('Design you V60 Recharge car', async () => {
     });
 });
 
-describe('Review your V60 Recharge', async () => {
-    it('Verify the title', async () => {
+describe('Review your V60 Recharge design', async () => {
+    it('Should verify the review title', async () => {
         const reviewTitle   = await V60.ReviewTitle;
         const reviewDesc    = await V60.ReviewDesc;
 
@@ -155,7 +160,7 @@ describe('Review your V60 Recharge', async () => {
         expect(await reviewDesc.getText()).toEqual(ReviewLabels.REVIEW_DESC);
     });
 
-    it ('Test Features popup', async () => {
+    it ('Should test Features popup', async () => {
         const viewFeaturesBtn = await V60.ViewFeaturesBtn;
         const closeFeatureBtn = await V60.CloseFeatureBtn;
 
@@ -166,7 +171,7 @@ describe('Review your V60 Recharge', async () => {
         await browser.pause(1000);
     });
 
-    it('Test the carousel', async () => {
+    it('Should test the carousel', async () => {
         const nextCaorouselBtn  = await V60.ReviewNextCarousel;
         const prevCarouselBtn   = await V60.ReviewPrevCarousel;
 
@@ -181,7 +186,7 @@ describe('Review your V60 Recharge', async () => {
         await prevCarouselBtn.click();
     });
 
-    it('Review your design', async () => {
+    it('Should review your design', async () => {
         const reviewLevel       = await V60.ReviewLevel;
         const reviewPowertrain  = await V60.ReviewPowertrain;
         const reviewColor       = await V60.ReviewColor;
@@ -196,7 +201,7 @@ describe('Review your V60 Recharge', async () => {
         expect(await reviewInterior.getText()).toEqual(InteriorStyling.BLOND_LEATHER);
     });
 
-    it('Review environment impact', async () => {
+    it('Should review environment impact', async () => {
         const reviewEnvTitle    = await V60.EnvImpact;
         const reviewEnvDesc     = await V60.EnvImpactDesc;
 

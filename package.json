@@ -2,6 +2,15 @@
     "name": "webdriverio-tests",
     "version": "0.1.0",
     "private": true,
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/andemohit/webdriverio-volvocars"
+    },
+    "author": {
+        "name": "Mohit Ande",
+        "email": "andemohit@gmail.com",
+        "url": "https://andemohit.me"
+    },
     "devDependencies": {
         "@wdio/allure-reporter": "^7.23.0",
         "@wdio/cli": "^7.23.0",

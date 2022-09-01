@@ -7,14 +7,15 @@ describe('Open home page', () => {
     describe('Open home page', () => {
         before(async () => {
             S60.open();                    // Open home page
+            await browser.maximizeWindow();
             await S60.acceptCookies();     // Accepts cookies
         });
 
         it('Open XC40 Recharge Page', async () => {
-            const menuBtn = await S60.MenuBtn;
-            const buyBtn = await S60.BuyBtn;
-            const carConfigBtn = await S60.CarConfigBtn;
-            const s60Card = await S60.S60Card;
+            const menuBtn       = await S60.MenuBtn;
+            const buyBtn        = await S60.BuyBtn;
+            const carConfigBtn  = await S60.CarConfigBtn;
+            const s60Card       = await S60.S60Card;
 
             await menuBtn.click();
             await browser.pause(2000);
@@ -30,9 +31,13 @@ describe('Open home page', () => {
 });
 
 describe('Design you S60 car', async () => {
+    it('Should test image comparison for callouts', async() => {
+        expect(await browser.checkElement(await S60.IntroEl, 'S60-intro', {})).toEqual(0);
+    });
+
     it('Verify the title', async () => {
-        const pageTitle = await S60.PageTitle;
-        const pageDesc = await S60.PageDesc;
+        const pageTitle     = await S60.PageTitle;
+        const pageDesc      = await S60.PageDesc;
         const scrollToStart = await S60.ScrollToStart;
 
         expect(await pageTitle.getText()).toEqual(S60Labels.PAGE_TITLE);
@@ -40,6 +45,10 @@ describe('Design you S60 car', async () => {
         // deepStrictEqual(browser.checkElement(await S60.IntroImage, 'S60'), 0);
         await scrollToStart.click();
         await browser.pause(3000);
+    });
+
+    it('Should compair image for sales version', async () => {
+        expect(await browser.checkElement(await S60.SalesVersionEl, 'S60-SalesVersion', {})).toEqual(0);
     });
 
     it('Choose your level', async () => {

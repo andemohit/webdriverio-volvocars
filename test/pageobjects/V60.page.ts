@@ -20,6 +20,10 @@ class V60 extends DesignCar {
     get V60Card() {
         return $('a[data-di-id="di-id-fdc72f08-d7796779"]');
     }
+
+    get IntroEl() {
+        return $('[data-testid="stage-intro"]');
+    }
 }
 
 export default new V60();
